@@ -4,7 +4,7 @@ MAINTAINER Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ENV HELM_VERSION 2.4.0
 
-COPY ./helm-v2.4.0-linux-arm.tar.gz /helm.tar.gz
+COPY ./helm-2.4.0-linux-arm.tar.gz /helm.tar.gz
 RUN mkdir -p /usr/local/helm && \
     tar -xzf /helm.tar.gz -C /usr/local/helm --strip-components=1 && \
     mv /usr/local/helm/tiller /tiller && \
