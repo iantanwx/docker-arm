@@ -1,4 +1,4 @@
-FROM kodbasen/java-jdk-arm
+FROM kodbasen/java-jdk-arm:jdk-8u111-b14
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 
