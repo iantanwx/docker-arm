@@ -1,4 +1,4 @@
-FROM hypriot/rpi-java:latest
+FROM kodbasen/java-jdk-arm
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 
