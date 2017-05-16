@@ -1,6 +1,6 @@
-FROM kodbasen/java-jdk-arm:jdk-8u111-b14
+FROM hypriot/rpi-java
 
-RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
