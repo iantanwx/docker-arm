@@ -30,7 +30,6 @@ ARG VERSION=3.7
 
 RUN apt-get update \
   && apt-get -y install bash git curl zip \
-  && useradd -c "Jenkins user" -d $HOME -m jenkins \
   && curl --create-dirs -ksSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
   && chmod 644 /usr/share/jenkins/slave.jar \
