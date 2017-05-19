@@ -23,18 +23,24 @@
 FROM kodbasen/java-jdk-arm:jdk-8u111-b14
 
 ENV HOME /home/jenkins
+ENV NVM_DIR $HOME/nvm.sh
 RUN groupadd -g 10000 jenkins
 RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 10000 -m jenkins
 
 ARG VERSION=3.7
 
-RUN apt-get update \
-  && apt-get -y install bash git curl zip \
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get update \
+  && apt-get -y install bash git curl zip yarn \
   && curl --create-dirs -ksSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
   && chmod 644 /usr/share/jenkins/slave.jar \
   && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+  && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash \
+  && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" \
+  && nvm install v7.9.0
 
 COPY jenkins-slave.sh /usr/local/bin/jenkins-slave
 
