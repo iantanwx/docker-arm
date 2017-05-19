@@ -31,9 +31,7 @@ ARG VERSION=3.7
 
 RUN apt-get update \
   && apt-get -y install bash git curl zip \
-  && curl --sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-  && apt-get -y install yarn \
+  && curl -o- https://yarnpkg.com/install.sh | bash \
   && curl --create-dirs -ksSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
   && chmod 644 /usr/share/jenkins/slave.jar \
